@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latsol SHB Fisika – Energi Kelas X</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$']] } };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0a0e1a;--surface:#111827;--card:#161d2e;--border:#1e293b;
+  --orange:#f97316;--blue:#38bdf8;--green:#4ade80;--red:#f87171;
+  --yellow:#fbbf24;--purple:#c084fc;--teal:#2dd4bf;
+  --text:#f1f5f9;--muted:#64748b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* BG subtle grid */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(56,189,248,.03) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(56,189,248,.03) 1px,transparent 1px);
+  background-size:40px 40px;pointer-events:none;z-index:0;
+}
+
+header{
+  background:linear-gradient(135deg,#0d1424,#111827);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:50;
+  box-shadow:0 4px 32px rgba(0,0,0,.5);
+}
+.header-inner{max-width:1100px;margin:0 auto;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{display:flex;align-items:center;gap:.75rem}
+.logo-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#f97316,#ea580c);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.logo h1{font-size:1.1rem;font-weight:800;line-height:1.2}
+.logo p{font-size:.7rem;color:var(--muted)}
+.badge-header{background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);
+  color:var(--orange);padding:.3rem .9rem;border-radius:999px;font-size:.75rem;font-weight:700;
+  white-space:nowrap}
+
+main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1}
+
+/* Tab nav */
+.tab-nav{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.tab-btn{
+  padding:.5rem 1.2rem;border-radius:8px;font-size:.82rem;font-weight:700;
+  border:1px solid var(--border);background:var(--card);color:var(--muted);
+  cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.tab-btn:hover{border-color:var(--orange);color:var(--text)}
+.tab-btn.active{background:linear-gradient(135deg,rgba(249,115,22,.2),rgba(249,115,22,.1));
+  border-color:var(--orange);color:var(--orange)}
+
+/* Tab content */
+.tab-pane{display:none}
+.tab-pane.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* Section header */
+.section-header{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:1.25rem 1.5rem;margin-bottom:1.5rem;
+  border-left:4px solid var(--orange);
+}
+.section-header h2{font-size:1.25rem;font-weight:800}
+.section-header p{font-size:.82rem;color:var(--muted);margin-top:.25rem}
+.section-meta{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.75rem}
+.meta-chip{
+  font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:999px;
+  display:inline-flex;align-items:center;gap:.3rem;
+}
+
+/* Question card */
+.q-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:1.4rem;margin-bottom:1rem;transition:border-color .2s;
+}
+.q-card:hover{border-color:rgba(56,189,248,.2)}
+.q-number{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:8px;font-size:.75rem;font-weight:800;
+  background:rgba(249,115,22,.15);color:var(--orange);border:1px solid rgba(249,115,22,.3);
+  margin-right:.5rem;flex-shrink:0;
+}
+.q-text{font-size:.9rem;line-height:1.7;margin-bottom:1rem}
+.q-badge{
+  display:inline-block;font-size:.65rem;font-weight:800;padding:.15rem .6rem;
+  border-radius:4px;margin-right:.4rem;vertical-align:middle;text-transform:uppercase;letter-spacing:.05em;
+}
+.badge-tricky{background:rgba(251,191,36,.15);color:var(--yellow);border:1px solid rgba(251,191,36,.3)}
+.badge-hitung{background:rgba(56,189,248,.15);color:var(--blue);border:1px solid rgba(56,189,248,.3)}
+.badge-literasi{background:rgba(192,132,252,.15);color:var(--purple);border:1px solid rgba(192,132,252,.3)}
+.badge-konsep{background:rgba(74,222,128,.15);color:var(--green);border:1px solid rgba(74,222,128,.3)}
+
+/* Options */
+.options{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+@media(max-width:600px){.options{grid-template-columns:1fr}}
+.opt-label{
+  display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;
+  background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;
+  cursor:pointer;transition:all .15s;font-size:.85rem;
+}
+.opt-label:hover{border-color:var(--orange);background:rgba(249,115,22,.06)}
+.opt-label.correct{border-color:var(--green);background:rgba(74,222,128,.08)}
+.opt-label.wrong{border-color:var(--red);background:rgba(248,113,113,.08)}
+input[type=radio]{accent-color:var(--orange);width:1rem;height:1rem;flex-shrink:0}
+
+/* Explanation */
+.explanation{
+  margin-top:.85rem;padding:1rem;border-radius:10px;font-size:.83rem;line-height:1.7;
+  background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.2);display:none;
+}
+.explanation.show{display:block;animation:fadeUp .2s ease}
+.exp-title{color:var(--blue);font-weight:700;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+
+/* Formula inline */
+.formula-inline{
+  display:inline-block;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);
+  border-radius:6px;padding:.1rem .6rem;font-family:'Fira Code',monospace;font-size:.85em;
+}
+
+/* Submit bar */
+.submit-bar{
+  display:flex;align-items:center;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;
+  padding-top:1.25rem;border-top:1px solid var(--border);
+}
+.btn-check{
+  background:linear-gradient(135deg,#f97316,#ea580c);color:white;
+  font-weight:700;padding:.7rem 1.8rem;border-radius:10px;border:none;
+  cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;
+  transition:all .2s;
+}
+.btn-check:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(249,115,22,.3)}
+.result-box{
+  padding:.5rem 1.2rem;border-radius:8px;font-weight:700;font-size:.85rem;display:none;
+}
+
+/* Progress */
+.progress-bar{height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:1.5rem}
+.progress-fill{height:100%;background:linear-gradient(90deg,#f97316,#fb923c);border-radius:999px;transition:width .5s ease}
+
+/* Score panel */
+.score-panel{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:1.25rem;text-align:center;
+}
+
+/* Tricky hint */
+.tricky-hint{
+  display:flex;align-items:flex-start;gap:.5rem;margin-top:.75rem;padding:.6rem .9rem;
+  background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.2);border-radius:8px;
+  font-size:.78rem;color:rgba(251,191,36,.8);
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">⚡</div>
+      <div>
+        <h1>Latsol SHB Fisika – Energi</h1>
+        <p>Kelas X Semester Genap 2024-2025 · 33 Soal</p>
+      </div>
+    </div>
+    <div class="badge-header hidden sm:block">Kisi-Kisi Resmi</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Progress -->
+  <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+
+  <!-- Score Panel -->
+  <div class="score-panel" style="margin-bottom:1.5rem">
+    <div style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap">
+      <div><p style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Total Soal</p><p style="font-size:1.8rem;font-weight:800;color:var(--orange)">33</p></div>
+      <div><p style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Dijawab</p><p style="font-size:1.8rem;font-weight:800;color:var(--blue)" id="answered-count">0</p></div>
+      <div><p style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Nilai Terakhir</p><p style="font-size:1.8rem;font-weight:800;color:var(--green)" id="total-score">–</p></div>
+    </div>
+  </div>
+
+  <!-- Tab Nav -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('t1','btn1')" id="btn1">
+      ⚡ Bag. 1 – Bentuk Energi <span style="opacity:.6;font-weight:400">(6 soal)</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('t2','btn2')" id="btn2">
+      ⚙️ Bag. 2 – Energi Mekanik <span style="opacity:.6;font-weight:400">(8 soal)</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('t3','btn3')" id="btn3">
+      🛢️ Bag. 3 – Energi & Lingkungan <span style="opacity:.6;font-weight:400">(8 soal)</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('t4','btn4')" id="btn4">
+      🌱 Bag. 4 – Energi Alternatif <span style="opacity:.6;font-weight:400">(11 soal)</span>
+    </button>
+  </div>
+
+  <!-- ==================== BAGIAN 1 ==================== -->
+  <div id="t1" class="tab-pane active">
+    <div class="section-header">
+      <h2>⚡ Bagian 1 — Bentuk-Bentuk Energi & Sumbernya</h2>
+      <p>Energi potensial, energi kinetik, kalor, dan energi listrik</p>
+      <div class="section-meta">
+        <span class="meta-chip" style="background:rgba(56,189,248,.12);color:var(--blue);border:1px solid rgba(56,189,248,.25)"><i class="fa-solid fa-circle-question"></i> 6 Soal</span>
+        <span class="meta-chip badge-hitung"><i class="fa-solid fa-calculator"></i> Banyak hitungan</span>
+        <span class="meta-chip badge-tricky"><i class="fa-solid fa-triangle-exclamation"></i> Ada yang tricky</span>
+      </div>
+    </div>
+
+    <form id="form1">
+
+      <!-- S1 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">1</span>
+          <div style="flex:1">
+            <span class="q-badge badge-tricky">Tricky</span>
+            <span class="q-badge badge-hitung">Hitungan</span>
+          </div>
+        </div>
+        <p class="q-text">
+          Sebuah benda bermassa $m$ dijatuhkan dari ketinggian $h$. Tepat sebelum menyentuh tanah, kecepatannya adalah $v$. Pernyataan yang <strong>paling tepat</strong> adalah...
+        </p>
+        <div class="tricky-hint"><i class="fa-solid fa-lightbulb" style="flex-shrink:0;margin-top:2px"></i> <span>Pikirkan: apakah energi potensial awal sama persis dengan energi kinetik akhir? Kapan itu berlaku?</span></div>
+        <div class="options" style="margin-top:.85rem" id="q1_opts">
+          <label class="opt-label"><input type="radio" name="q1" value="A"> A. $E_p = mgh$ selalu sama dengan $\frac{1}{2}mv^2$ dalam kondisi apapun</label>
+          <label class="opt-label"><input type="radio" name="q1" value="B"> B. $mgh = \frac{1}{2}mv^2$ hanya berlaku jika tidak ada hambatan udara</label>
+          <label class="opt-label"><input type="radio" name="q1" value="C"> C. $v = \sqrt{gh}$ selalu berlaku tanpa pengecualian</label>
+          <label class="opt-label"><input type="radio" name="q1" value="D"> D. Energi kinetik akhir pasti lebih besar dari energi potensial awal</label>
+        </div>
+        <div class="explanation" id="exp1">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Hukum Kekekalan Energi Mekanik berlaku <strong>hanya jika tidak ada gaya non-konservatif</strong> (hambatan udara, gesekan). Jika ada hambatan, sebagian $E_p$ berubah menjadi kalor sehingga $E_{k_{akhir}} < E_{p_{awal}}$. Opsi A salah karena mengklaim "kondisi apapun". Opsi C: $v = \sqrt{2gh}$, bukan $\sqrt{gh}$. Opsi D terbalik — justru $E_k \leq E_p$.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <!-- S2 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">2</span>
+          <div style="flex:1"><span class="q-badge badge-hitung">Hitungan</span></div>
+        </div>
+        <p class="q-text">
+          Sebuah bola bermassa $0{,}5$ kg dilempar ke atas dari ketinggian $2$ m dengan kecepatan awal $10$ m/s. Berapa energi potensial bola saat berada di ketinggian <strong>maksimum</strong>? ($g = 10$ m/s²)
+        </p>
+        <div class="tricky-hint"><i class="fa-solid fa-lightbulb" style="flex-shrink:0;margin-top:2px"></i> <span>Jangan lupa: bola tidak mulai dari tanah! Ketinggian awal sudah 2 m.</span></div>
+        <div class="options" id="q2_opts">
+          <label class="opt-label"><input type="radio" name="q2" value="A"> A. $25$ J</label>
+          <label class="opt-label"><input type="radio" name="q2" value="B"> B. $35$ J</label>
+          <label class="opt-label"><input type="radio" name="q2" value="C"> C. $50$ J</label>
+          <label class="opt-label"><input type="radio" name="q2" value="D"> D. $10$ J</label>
+        </div>
+        <div class="explanation" id="exp2">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Di titik tertinggi, $v = 0$, sehingga semua energi mekanik berupa $E_p$.<br>
+          $E_m = E_{p_0} + E_{k_0} = mgh_0 + \frac{1}{2}mv_0^2 = (0{,}5)(10)(2) + \frac{1}{2}(0{,}5)(100) = 10 + 25 = 35$ J.<br>
+          Karena $E_m$ kekal (anggap tanpa hambatan): $E_{p_{max}} = 35$ J.<br>
+          Pengecoh: 25 J (hanya $E_k$ awal), 10 J (hanya $E_p$ awal).</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <!-- S3 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">3</span>
+          <div style="flex:1"><span class="q-badge badge-tricky">Tricky</span><span class="q-badge badge-hitung">Hitungan</span></div>
+        </div>
+        <p class="q-text">
+          Dua benda P dan Q bermassa sama. P bergerak dengan kecepatan $v$ dan Q bergerak dengan kecepatan $3v$. Energi kinetik Q dibandingkan P adalah...
+        </p>
+        <div class="options" id="q3_opts">
+          <label class="opt-label"><input type="radio" name="q3" value="A"> A. 3 kali lebih besar</label>
+          <label class="opt-label"><input type="radio" name="q3" value="B"> B. 6 kali lebih besar</label>
+          <label class="opt-label"><input type="radio" name="q3" value="C"> C. 9 kali lebih besar</label>
+          <label class="opt-label"><input type="radio" name="q3" value="D"> D. 27 kali lebih besar</label>
+        </div>
+        <div class="explanation" id="exp3">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>$\frac{E_{kQ}}{E_{kP}} = \frac{\frac{1}{2}m(3v)^2}{\frac{1}{2}mv^2} = \frac{9v^2}{v^2} = 9$.<br>
+          Energi kinetik bergantung pada $v^2$ (bukan $v$). Banyak yang terjebak memilih 3 kali karena kecepatan 3 kali. Pilihan D (27 kali) muncul jika keliru menggunakan $v^3$.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: C</p>
+        </div>
+      </div>
+
+      <!-- S4 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">4</span>
+          <div style="flex:1"><span class="q-badge badge-hitung">Hitungan</span></div>
+        </div>
+        <p class="q-text">
+          Air sebanyak $500$ gram dipanaskan dari $20°C$ menjadi $70°C$. Kalor jenis air $c = 4.200$ J/kg°C. Kemudian $200$ gram air lain dicampurkan pada suhu $100°C$. Berapa kalor yang <strong>dilepas</strong> oleh air panas sebelum mencapai kesetimbangan? (abaikan kalor yang hilang ke lingkungan, suhu akhir campuran = $?$)
+        </p>
+        <div class="tricky-hint"><i class="fa-solid fa-lightbulb" style="flex-shrink:0;margin-top:2px"></i> <span>Soal ini hanya menanyakan kalor yang dilepas air panas — tidak perlu menghitung suhu akhir.</span></div>
+        <div class="options" id="q4_opts">
+          <label class="opt-label"><input type="radio" name="q4" value="A"> A. Tidak bisa ditentukan tanpa suhu akhir</label>
+          <label class="opt-label"><input type="radio" name="q4" value="B"> B. Sama dengan kalor yang diserap air dingin</label>
+          <label class="opt-label"><input type="radio" name="q4" value="C"> C. Lebih besar dari kalor yang diserap air dingin</label>
+          <label class="opt-label"><input type="radio" name="q4" value="D"> D. Lebih kecil dari kalor yang diserap air dingin</label>
+        </div>
+        <div class="explanation" id="exp4">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Menurut Asas Black: dalam sistem tertutup (tanpa kehilangan kalor ke lingkungan), <strong>kalor yang dilepas = kalor yang diserap</strong>. Ini prinsip kekekalan energi dalam perpindahan kalor. Jika dianggap tidak ada kalor yang hilang ke lingkungan, maka $Q_{lepas} = Q_{serap}$.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <!-- S5 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">5</span>
+          <div style="flex:1"><span class="q-badge badge-hitung">Hitungan</span></div>
+        </div>
+        <p class="q-text">
+          Sebuah lampu bertuliskan "$220V – 100W$" menyala selama $2$ jam. Jika tarif listrik Rp1.500/kWh, berapa biaya listrik yang harus dibayar?
+        </p>
+        <div class="options" id="q5_opts">
+          <label class="opt-label"><input type="radio" name="q5" value="A"> A. Rp 300</label>
+          <label class="opt-label"><input type="radio" name="q5" value="B"> B. Rp 400</label>
+          <label class="opt-label"><input type="radio" name="q5" value="C"> C. Rp 440</label>
+          <label class="opt-label"><input type="radio" name="q5" value="D"> D. Rp 600</label>
+        </div>
+        <div class="explanation" id="exp5">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>$P = 100$ W = $0{,}1$ kW. Waktu = 2 jam.<br>
+          Energi = $0{,}1 \times 2 = 0{,}2$ kWh.<br>
+          Biaya = $0{,}2 \times 1500 = $ Rp 300.<br>
+          Pengecoh: tegangan 220V tidak diperlukan jika daya sudah diketahui. Banyak siswa mengalikan 220 × 2 yang keliru.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: A</p>
+        </div>
+      </div>
+
+      <!-- S6 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">6</span>
+          <div style="flex:1"><span class="q-badge badge-tricky">Tricky</span><span class="q-badge badge-konsep">Konsep</span></div>
+        </div>
+        <p class="q-text">
+          Perubahan energi yang terjadi pada panel surya (sel fotovoltaik) adalah...
+        </p>
+        <div class="options" id="q6_opts">
+          <label class="opt-label"><input type="radio" name="q6" value="A"> A. Energi panas → Energi listrik</label>
+          <label class="opt-label"><input type="radio" name="q6" value="B"> B. Energi cahaya → Energi listrik</label>
+          <label class="opt-label"><input type="radio" name="q6" value="C"> C. Energi kinetik → Energi listrik</label>
+          <label class="opt-label"><input type="radio" name="q6" value="D"> D. Energi kimia → Energi listrik</label>
+        </div>
+        <div class="explanation" id="exp6">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Panel surya (fotovoltaik) mengubah <strong>energi cahaya (foton)</strong> langsung menjadi energi listrik melalui efek fotoelektrik pada semikonduktor. Ini berbeda dengan panel surya termal (panas → listrik). Banyak yang terkecoh dengan opsi A karena matahari identik dengan "panas".</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <div class="submit-bar">
+        <button type="button" class="btn-check" onclick="checkSection('form1',1,['B','B','C','B','A','B'],6)">
+          <i class="fa-solid fa-check-double" style="margin-right:.4rem"></i>Periksa Bagian 1
+        </button>
+        <div class="result-box" id="res1"></div>
+      </div>
+    </form>
+  </div>
+
+  <!-- ==================== BAGIAN 2 ==================== -->
+  <div id="t2" class="tab-pane">
+    <div class="section-header" style="border-left-color:var(--teal)">
+      <h2>⚙️ Bagian 2 — Energi Mekanik & PLTA</h2>
+      <p>Hukum Kekekalan Energi Mekanik + Pemanfaatan energi air pada PLTA</p>
+      <div class="section-meta">
+        <span class="meta-chip" style="background:rgba(45,212,191,.12);color:var(--teal);border:1px solid rgba(45,212,191,.25)"><i class="fa-solid fa-circle-question"></i> 8 Soal</span>
+        <span class="meta-chip badge-hitung"><i class="fa-solid fa-calculator"></i> Hitungan PLTA</span>
+      </div>
+    </div>
+
+    <form id="form2">
+
+      <!-- S7 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">7</span>
+          <div style="flex:1"><span class="q-badge badge-tricky">Tricky</span></div>
+        </div>
+        <p class="q-text">
+          Sebuah benda meluncur dari puncak bukit setinggi $20$ m tanpa kecepatan awal. Di titik A (ketinggian $12$ m), benda memiliki kecepatan $v_A$. Di titik B (ketinggian $4$ m), benda memiliki kecepatan $v_B$. Perbandingan $v_A : v_B$ adalah... ($g = 10$ m/s², tanpa gesekan)
+        </p>
+        <div class="options" id="q7_opts">
+          <label class="opt-label"><input type="radio" name="q7" value="A"> A. $\sqrt{8} : \sqrt{16}$</label>
+          <label class="opt-label"><input type="radio" name="q7" value="B"> B. $2 : \sqrt{8}$</label>
+          <label class="opt-label"><input type="radio" name="q7" value="C"> C. $\sqrt{8} : \sqrt{32}$ = $1 : 2$</label>
+          <label class="opt-label"><input type="radio" name="q7" value="D"> D. $12 : 4 = 3 : 1$</label>
+        </div>
+        <div class="explanation" id="exp7">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Gunakan kekekalan energi mekanik dari puncak (h₀=20, v₀=0):<br>
+          $v_A^2 = 2g(h_0 - h_A) = 2(10)(20-12) = 160$ → $v_A = \sqrt{160} = 4\sqrt{10}$<br>
+          $v_B^2 = 2g(h_0 - h_B) = 2(10)(20-4) = 320$ → $v_B = \sqrt{320} = 8\sqrt{5}$<br>
+          $v_A : v_B = \sqrt{160}:\sqrt{320} = \sqrt{1}:\sqrt{2} = 1:\sqrt{2}$<br>
+          Sederhananya: $\sqrt{8}:\sqrt{16} = 2\sqrt{2}:4 = \sqrt{2}:2 = 1:\sqrt{2}$. Ini sama dengan opsi A/C.<br>
+          Pengecoh D: salah jika langsung membandingkan ketinggian.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: C ($1:\sqrt{2}$)</p>
+        </div>
+      </div>
+
+      <!-- S8 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">8</span>
+          <div style="flex:1"><span class="q-badge badge-hitung">Hitungan</span></div>
+        </div>
+        <p class="q-text">
+          Benda $2$ kg meluncur bebas dari ketinggian $45$ m. Ketika $\frac{2}{3}$ perjalanan telah ditempuh (menghitung dari atas), berapakah kecepatan benda? ($g = 10$ m/s², tanpa gesekan)
+        </p>
+        <div class="tricky-hint"><i class="fa-solid fa-lightbulb" style="flex-shrink:0;margin-top:2px"></i> <span>Hati-hati: "$\frac{2}{3}$ perjalanan ditempuh" → benda sudah turun $\frac{2}{3} \times 45$ m dari atas.</span></div>
+        <div class="options" id="q8_opts">
+          <label class="opt-label"><input type="radio" name="q8" value="A"> A. $10$ m/s</label>
+          <label class="opt-label"><input type="radio" name="q8" value="B"> B. $20\sqrt{1{,}5}$ m/s</label>
+          <label class="opt-label"><input type="radio" name="q8" value="C"> C. $30$ m/s</label>
+          <label class="opt-label"><input type="radio" name="q8" value="D"> D. $\sqrt{600}$ m/s ≈ 24,5 m/s</label>
+        </div>
+        <div class="explanation" id="exp8">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Jarak turun = $\frac{2}{3} \times 45 = 30$ m. Ketinggian saat ini = $45 - 30 = 15$ m.<br>
+          Kekekalan energi: $mgh_0 = mgh + \frac{1}{2}mv^2$<br>
+          $v^2 = 2g(h_0 - h) = 2(10)(45-15) = 600$<br>
+          $v = \sqrt{600} \approx 24{,}5$ m/s.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: D</p>
+        </div>
+      </div>
+
+      <!-- S9 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">9</span>
+          <div style="flex:1"><span class="q-badge badge-tricky">Tricky</span><span class="q-badge badge-konsep">Konsep</span></div>
+        </div>
+        <p class="q-text">
+          Sebuah ayunan bandul dilepas dari posisi A (ketinggian $h$) dan bergerak ke posisi B (titik terendah). Kemudian bandul terus bergerak ke C. Pernyataan yang <strong>benar</strong> mengenai ketinggian C adalah...
+        </p>
+        <div class="options" id="q9_opts">
+          <label class="opt-label"><input type="radio" name="q9" value="A"> A. Ketinggian C selalu lebih kecil dari h karena ada gesekan udara</label>
+          <label class="opt-label"><input type="radio" name="q9" value="B"> B. Ketinggian C sama dengan h jika tidak ada gesekan</label>
+          <label class="opt-label"><input type="radio" name="q9" value="C"> C. Ketinggian C selalu sama dengan h dalam kondisi nyata</label>
+          <label class="opt-label"><input type="radio" name="q9" value="D"> D. Ketinggian C bisa lebih besar dari h jika benda cukup ringan</label>
+        </div>
+        <div class="explanation" id="exp9">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Dalam sistem ideal (tanpa gesekan), energi mekanik kekal → bandul akan mencapai ketinggian yang sama di sisi lain. Namun dalam kondisi nyata selalu ada gesekan udara → ketinggian C sedikit lebih rendah dari A. Opsi B adalah kondisi ideal, bukan kondisi nyata. Opsi A lebih tepat untuk kondisi nyata. Dalam kondisi nyata, ketinggian C < h.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: A (kondisi nyata) / B (kondisi ideal — bergantung konteks soal)</p>
+          <p style="color:var(--yellow);font-size:.8rem;margin-top:.4rem">⚠️ Catatan: Soal konteksnya "bandul nyata" → jawaban A. Jika "ideal" → jawaban B.</p>
+        </div>
+      </div>
+
+      <!-- S10 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">10</span>
+          <div style="flex:1"><span class="q-badge badge-hitung">Hitungan</span></div>
+        </div>
+        <p class="q-text">
+          Benda bermassa $4$ kg berada di ketinggian $10$ m dan bergerak dengan kecepatan $6$ m/s. Berapakah energi mekanik total benda tersebut? ($g = 10$ m/s²)
+        </p>
+        <div class="options" id="q10_opts">
+          <label class="opt-label"><input type="radio" name="q10" value="A"> A. $400$ J</label>
+          <label class="opt-label"><input type="radio" name="q10" value="B"> B. $472$ J</label>
+          <label class="opt-label"><input type="radio" name="q10" value="C"> C. $420$ J</label>
+          <label class="opt-label"><input type="radio" name="q10" value="D"> D. $240$ J</label>
+        </div>
+        <div class="explanation" id="exp10">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>$E_p = mgh = 4 \times 10 \times 10 = 400$ J<br>
+          $E_k = \frac{1}{2}mv^2 = \frac{1}{2}(4)(36) = 72$ J<br>
+          $E_m = 400 + 72 = 472$ J<br>
+          Pengecoh: 400 J (lupa $E_k$), 420 J (menggunakan $v=10$ bukan $v^2=36$).</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <!-- S11 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">11</span>
+          <div style="flex:1"><span class="q-badge badge-hitung">Hitungan</span><span class="q-badge badge-tricky">Tricky</span></div>
+        </div>
+        <p class="q-text">
+          PLTA memiliki debit air $Q = 20$ m³/s dengan ketinggian jatuh air $h = 50$ m. Jika efisiensi PLTA adalah $80\%$, berapakah daya listrik yang dihasilkan? ($\rho_{air} = 1000$ kg/m³, $g = 10$ m/s²)
+        </p>
+        <div class="tricky-hint"><i class="fa-solid fa-lightbulb" style="flex-shrink:0;margin-top:2px"></i><span>Daya input = $\rho g Q h$. Lalu kalikan efisiensi. Jangan lupa $\eta$ dalam desimal.</span></div>
+        <div class="options" id="q11_opts">
+          <label class="opt-label"><input type="radio" name="q11" value="A"> A. $8$ MW</label>
+          <label class="opt-label"><input type="radio" name="q11" value="B"> B. $10$ MW</label>
+          <label class="opt-label"><input type="radio" name="q11" value="C"> C. $8.000$ W</label>
+          <label class="opt-label"><input type="radio" name="q11" value="D"> D. $80.000$ W</label>
+        </div>
+        <div class="explanation" id="exp11">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>$P_{input} = \rho g Q h = 1000 \times 10 \times 20 \times 50 = 10.000.000$ W = $10$ MW<br>
+          $P_{output} = \eta \times P_{input} = 0{,}8 \times 10 = 8$ MW<br>
+          Pengecoh: 10 MW (lupa efisiensi), 8.000 W dan 80.000 W (salah konversi satuan).</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: A</p>
+        </div>
+      </div>
+
+      <!-- S12 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">12</span>
+          <div style="flex:1"><span class="q-badge badge-hitung">Hitungan</span></div>
+        </div>
+        <p class="q-text">
+          Sebuah PLTA mengalirkan air dengan debit $Q = 50$ m³/s dari ketinggian $40$ m. Daya listrik yang dihasilkan adalah $16$ MW. Berapakah efisiensi PLTA tersebut? ($\rho = 1000$ kg/m³, $g = 10$ m/s²)
+        </p>
+        <div class="options" id="q12_opts">
+          <label class="opt-label"><input type="radio" name="q12" value="A"> A. $64\%$</label>
+          <label class="opt-label"><input type="radio" name="q12" value="B"> B. $70\%$</label>
+          <label class="opt-label"><input type="radio" name="q12" value="C"> C. $75\%$</label>
+          <label class="opt-label"><input type="radio" name="q12" value="D"> D. $80\%$</label>
+        </div>
+        <div class="explanation" id="exp12">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>$P_{input} = \rho g Q h = 1000 \times 10 \times 50 \times 40 = 20.000.000$ W = $20$ MW<br>
+          $\eta = \frac{P_{out}}{P_{in}} \times 100\% = \frac{16}{20} \times 100\% = 80\%$</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: D</p>
+        </div>
+      </div>
+
+      <!-- S13 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">13</span>
+          <div style="flex:1"><span class="q-badge badge-tricky">Tricky</span><span class="q-badge badge-konsep">Konsep</span></div>
+        </div>
+        <p class="q-text">
+          Mengapa efisiensi PLTA tidak pernah mencapai $100\%$? Pilih jawaban yang <strong>paling lengkap</strong>.
+        </p>
+        <div class="options" id="q13_opts">
+          <label class="opt-label"><input type="radio" name="q13" value="A"> A. Karena air tidak selalu tersedia</label>
+          <label class="opt-label"><input type="radio" name="q13" value="B"> B. Karena ada energi yang hilang menjadi kalor akibat gesekan turbin, hambatan listrik, dan turbulensi air</label>
+          <label class="opt-label"><input type="radio" name="q13" value="C"> C. Karena daya listrik selalu lebih besar dari daya input</label>
+          <label class="opt-label"><input type="radio" name="q13" value="D"> D. Karena ketinggian air tidak konstan</label>
+        </div>
+        <div class="explanation" id="exp13">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Berdasarkan hukum termodinamika ke-2, tidak ada mesin yang sempurna. Pada PLTA, energi hilang karena: gesekan pada turbin (→ kalor), hambatan dalam generator (→ kalor), turbulensi aliran air, dan kopling mekanis. Akibatnya $P_{out} < P_{in}$ selalu.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <!-- S14 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">14</span>
+          <div style="flex:1"><span class="q-badge badge-hitung">Hitungan</span><span class="q-badge badge-tricky">Tricky</span></div>
+        </div>
+        <p class="q-text">
+          Volume air yang mengalir melalui PLTA selama $1$ jam adalah $180.000$ m³. Dari data ini, debit air PLTA adalah... Jika ketinggian jatuh $h = 60$ m dan efisiensi $75\%$, daya listrik yang dihasilkan adalah... ($\rho = 1000$ kg/m³, $g = 10$ m/s²)
+        </p>
+        <div class="tricky-hint"><i class="fa-solid fa-lightbulb" style="flex-shrink:0;margin-top:2px"></i><span>Pertama hitung debit: $Q = V/t$. Hati-hati satuan waktu!</span></div>
+        <div class="options" id="q14_opts">
+          <label class="opt-label"><input type="radio" name="q14" value="A"> A. $Q = 50$ m³/s, Daya = $2{,}25 \times 10^9$ W</label>
+          <label class="opt-label"><input type="radio" name="q14" value="B"> B. $Q = 50$ m³/s, Daya = $225$ MW</label>
+          <label class="opt-label"><input type="radio" name="q14" value="C"> C. $Q = 3.000$ m³/s, Daya = besar sekali</label>
+          <label class="opt-label"><input type="radio" name="q14" value="D"> D. $Q = 50$ m³/s, Daya = $2.250$ kW</label>
+        </div>
+        <div class="explanation" id="exp14">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>$Q = V/t = 180.000 / 3600 = 50$ m³/s<br>
+          $P_{in} = \rho g Q h = 1000 \times 10 \times 50 \times 60 = 30.000.000$ W = $300$ MW<br>
+          $P_{out} = 0{,}75 \times 300 = 225$ MW<br>
+          Opsi A: satuannya benar (225 MW = $2{,}25 \times 10^8$ W, bukan $10^9$) → A salah.<br>
+          Opsi B: benar. Opsi D: 2.250 kW = 2,25 MW → terlalu kecil.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <div class="submit-bar">
+        <button type="button" class="btn-check" style="background:linear-gradient(135deg,#2dd4bf,#0d9488)" onclick="checkSection('form2',2,['C','D','A','B','B','D','B','B'],8)">
+          <i class="fa-solid fa-check-double" style="margin-right:.4rem"></i>Periksa Bagian 2
+        </button>
+        <div class="result-box" id="res2"></div>
+      </div>
+    </form>
+  </div>
+
+  <!-- ==================== BAGIAN 3 ==================== -->
+  <div id="t3" class="tab-pane">
+    <div class="section-header" style="border-left-color:var(--red)">
+      <h2>🛢️ Bagian 3 — Energi, Bahan Bakar Fosil & Lingkungan</h2>
+      <p>Konversi energi fosil, sumber terbarukan vs tak terbarukan, pencemaran lingkungan</p>
+      <div class="section-meta">
+        <span class="meta-chip" style="background:rgba(248,113,113,.12);color:var(--red);border:1px solid rgba(248,113,113,.25)"><i class="fa-solid fa-circle-question"></i> 8 Soal</span>
+        <span class="meta-chip badge-literasi"><i class="fa-solid fa-book-open"></i> Soal Literasi</span>
+      </div>
+    </div>
+
+    <form id="form3">
+
+      <!-- S15 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">15</span>
+          <div style="flex:1"><span class="q-badge badge-literasi">Literasi</span><span class="q-badge badge-tricky">Tricky</span></div>
+        </div>
+        <p class="q-text">
+          <em>Bacalah wacana berikut:</em><br><br>
+          <span style="background:rgba(255,255,255,.04);border-left:3px solid var(--orange);display:block;padding:.75rem 1rem;border-radius:0 8px 8px 0;margin-bottom:.75rem;font-size:.85rem;line-height:1.7">
+          Sebuah PLTU menggunakan 1 ton batu bara per jam untuk menghasilkan listrik. Nilai kalor batu bara adalah 28.000 kJ/kg. PLTU tersebut menghasilkan daya listrik 5 MW.
+          </span>
+          Efisiensi PLTU tersebut adalah...
+        </p>
+        <div class="options" id="q15_opts">
+          <label class="opt-label"><input type="radio" name="q15" value="A"> A. $\approx 64\%$</label>
+          <label class="opt-label"><input type="radio" name="q15" value="B"> B. $\approx 54\%$</label>
+          <label class="opt-label"><input type="radio" name="q15" value="C"> C. $\approx 18\%$</label>
+          <label class="opt-label"><input type="radio" name="q15" value="D"> D. $\approx 44\%$</label>
+        </div>
+        <div class="explanation" id="exp15">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Massa batu bara per detik = $1000$ kg / $3600$ s = $0{,}278$ kg/s<br>
+          $P_{in} = 28.000.000 \text{ J/kg} \times 0{,}278 \text{ kg/s} = 7.778.000$ W $\approx 7{,}78$ MW<br>
+          $\eta = \frac{5}{7{,}78} \times 100\% \approx 64\%$</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: A</p>
+        </div>
+      </div>
+
+      <!-- S16 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">16</span>
+          <div style="flex:1"><span class="q-badge badge-literasi">Literasi</span></div>
+        </div>
+        <p class="q-text">
+          <em>Wacana lanjutan:</em><br><br>
+          <span style="background:rgba(255,255,255,.04);border-left:3px solid var(--orange);display:block;padding:.75rem 1rem;border-radius:0 8px 8px 0;margin-bottom:.75rem;font-size:.85rem;line-height:1.7">
+          Nilai kalor bensin adalah 44.000 kJ/kg. Sebuah mobil bermassa 1.200 kg menggunakan 1 liter bensin (massa ≈ 0,75 kg) untuk menempuh jarak 12 km di jalan datar.
+          </span>
+          Jika seluruh energi bensin digunakan untuk melawan hambatan udara (diabaikan percepatan), maka gaya hambat udara rata-rata yang dialami mobil adalah...
+        </p>
+        <div class="options" id="q16_opts">
+          <label class="opt-label"><input type="radio" name="q16" value="A"> A. $2.750$ N</label>
+          <label class="opt-label"><input type="radio" name="q16" value="B"> B. $3.667$ N</label>
+          <label class="opt-label"><input type="radio" name="q16" value="C"> C. $2.500$ N</label>
+          <label class="opt-label"><input type="radio" name="q16" value="D"> D. $275$ N</label>
+        </div>
+        <div class="explanation" id="exp16">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Energi bensin = $44.000 \times 10^3 \times 0{,}75 = 33.000.000$ J = $33$ MJ<br>
+          Usaha = $F \times d = F \times 12.000$ m<br>
+          $F = \frac{33.000.000}{12.000} = 2.750$ N</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: A</p>
+        </div>
+      </div>
+
+      <!-- S17 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">17</span>
+          <div style="flex:1"><span class="q-badge badge-literasi">Literasi</span><span class="q-badge badge-tricky">Tricky</span></div>
+        </div>
+        <p class="q-text">
+          <em>Bacalah wacana berikut:</em><br><br>
+          <span style="background:rgba(255,255,255,.04);border-left:3px solid var(--orange);display:block;padding:.75rem 1rem;border-radius:0 8px 8px 0;margin-bottom:.75rem;font-size:.85rem;line-height:1.7">
+          Negara A menggunakan 60% energi dari batu bara, 30% dari gas alam, dan 10% dari energi surya. Negara B menggunakan 20% dari minyak bumi, 30% dari angin, dan 50% dari energi panas bumi.
+          </span>
+          Perbandingan persentase penggunaan sumber energi <strong>tak terbarukan</strong> antara Negara A dan B adalah...
+        </p>
+        <div class="options" id="q17_opts">
+          <label class="opt-label"><input type="radio" name="q17" value="A"> A. $90\% : 20\%$ = $9:2$</label>
+          <label class="opt-label"><input type="radio" name="q17" value="B"> B. $60\% : 50\%$ = $6:5$</label>
+          <label class="opt-label"><input type="radio" name="q17" value="C"> C. $90\% : 50\%$ = $9:5$</label>
+          <label class="opt-label"><input type="radio" name="q17" value="D"> D. $60\% : 20\%$ = $3:1$</label>
+        </div>
+        <div class="explanation" id="exp17">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Sumber tak terbarukan: batu bara, gas alam, minyak bumi.<br>
+          Negara A: batu bara (60%) + gas alam (30%) = <strong>90%</strong><br>
+          Negara B: minyak bumi (20%) = <strong>20%</strong> (angin & panas bumi = terbarukan)<br>
+          Perbandingan = $90\% : 20\% = 9:2$</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: A</p>
+        </div>
+      </div>
+
+      <!-- S18 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">18</span>
+          <div style="flex:1"><span class="q-badge badge-konsep">Konsep</span><span class="q-badge badge-tricky">Tricky</span></div>
+        </div>
+        <p class="q-text">
+          Pernyataan mana yang <strong>benar</strong> tentang energi nuklir dilihat dari aspek ketersediaannya sebagai sumber energi?
+        </p>
+        <div class="options" id="q18_opts">
+          <label class="opt-label"><input type="radio" name="q18" value="A"> A. Terbarukan, karena reaksi fisi menghasilkan energi baru</label>
+          <label class="opt-label"><input type="radio" name="q18" value="B"> B. Terbarukan, karena uranium tersedia sangat melimpah di alam</label>
+          <label class="opt-label"><input type="radio" name="q18" value="C"> C. Tak terbarukan, karena bahan bakar uranium terbatas dan tidak dapat dipulihkan dengan cepat</label>
+          <label class="opt-label"><input type="radio" name="q18" value="D"> D. Terbarukan, karena energi yang dihasilkan jauh lebih besar dari yang digunakan</label>
+        </div>
+        <div class="explanation" id="exp18">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Meskipun energi nuklir sangat besar, <strong>bahan bakar uranium bersifat terbatas</strong> dan tidak dapat dipulihkan secara alami dalam waktu manusiawi. Oleh karena itu diklasifikasikan sebagai <strong>tak terbarukan</strong>. Opsi A-B-D semua keliru karena "terbarukan" mengacu pada ketersediaan bahan bakar, bukan jumlah energi yang dihasilkan.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: C</p>
+        </div>
+      </div>
+
+      <!-- S19 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">19</span>
+          <div style="flex:1"><span class="q-badge badge-konsep">Konsep</span></div>
+        </div>
+        <p class="q-text">
+          Penggunaan bahan bakar fosil dikaitkan dengan pemanasan global karena...
+        </p>
+        <div class="options" id="q19_opts">
+          <label class="opt-label"><input type="radio" name="q19" value="A"> A. Membakar fosil menghasilkan abu yang menghalangi sinar matahari</label>
+          <label class="opt-label"><input type="radio" name="q19" value="B"> B. Menghasilkan CO₂ dan gas rumah kaca yang memerangkap panas di atmosfer</label>
+          <label class="opt-label"><input type="radio" name="q19" value="C"> C. Fosil mengandung radioaktif yang memanaskan bumi</label>
+          <label class="opt-label"><input type="radio" name="q19" value="D"> D. Pembakaran langsung memanaskan udara sekitar</label>
+        </div>
+        <div class="explanation" id="exp19">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Gas CO₂, CH₄, dan N₂O yang dihasilkan pembakaran bahan bakar fosil bertindak sebagai "selimut" di atmosfer — memerangkap radiasi panas yang seharusnya dipantulkan ke luar angkasa. Efek inilah yang menyebabkan pemanasan global.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <!-- S20 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">20</span>
+          <div style="flex:1"><span class="q-badge badge-tricky">Tricky</span><span class="q-badge badge-konsep">Konsep</span></div>
+        </div>
+        <p class="q-text">
+          Sebuah pabrik membuang limbah cair panas ke sungai. Ini menyebabkan ikan-ikan mati. Jenis pencemaran yang paling tepat menggambarkan kejadian ini adalah...
+        </p>
+        <div class="options" id="q20_opts">
+          <label class="opt-label"><input type="radio" name="q20" value="A"> A. Pencemaran udara dan air</label>
+          <label class="opt-label"><input type="radio" name="q20" value="B"> B. Pencemaran air (polusi termal)</label>
+          <label class="opt-label"><input type="radio" name="q20" value="C"> C. Pencemaran tanah</label>
+          <label class="opt-label"><input type="radio" name="q20" value="D"> D. Pencemaran suara</label>
+        </div>
+        <div class="explanation" id="exp20">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Limbah cair panas yang masuk sungai menyebabkan <strong>polusi termal (thermal pollution)</strong> — suatu jenis pencemaran air di mana suhu air naik secara drastis, mengurangi kadar oksigen terlarut dan membunuh organisme air. Ini adalah kategori pencemaran air, bukan udara atau tanah.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <!-- S21 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">21</span>
+          <div style="flex:1"><span class="q-badge badge-konsep">Konsep</span><span class="q-badge badge-tricky">Tricky</span></div>
+        </div>
+        <p class="q-text">
+          Pernyataan yang <strong>tidak tepat</strong> tentang energi tak terbarukan adalah...
+        </p>
+        <div class="options" id="q21_opts">
+          <label class="opt-label"><input type="radio" name="q21" value="A"> A. Biaya infrastruktur awal relatif lebih rendah dibanding energi terbarukan</label>
+          <label class="opt-label"><input type="radio" name="q21" value="B"> B. Emisi karbon yang dihasilkan berkontribusi pada perubahan iklim</label>
+          <label class="opt-label"><input type="radio" name="q21" value="C"> C. Ketersediaannya tidak terbatas jika dikelola dengan benar</label>
+          <label class="opt-label"><input type="radio" name="q21" value="D"> D. Biaya operasional jangka panjang cenderung lebih tinggi</label>
+        </div>
+        <div class="explanation" id="exp21">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Opsi C adalah pernyataan yang <strong>tidak tepat</strong>. Energi tak terbarukan (minyak, batu bara, gas) terbentuk selama jutaan tahun dan tidak dapat dipulihkan dalam skala waktu manusia — tidak peduli seberapa baik dikelola. Sifat "terbatas" adalah definisi fundamental dari energi tak terbarukan.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: C</p>
+        </div>
+      </div>
+
+      <!-- S22 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">22</span>
+          <div style="flex:1"><span class="q-badge badge-hitung">Hitungan</span></div>
+        </div>
+        <p class="q-text">
+          Sebuah mesin diesel menggunakan $2$ kg solar per jam dengan nilai kalor $42.000$ kJ/kg. Mesin menghasilkan daya mekanik $18$ kW. Berapa banyak energi yang terbuang sebagai panas per jam?
+        </p>
+        <div class="options" id="q22_opts">
+          <label class="opt-label"><input type="radio" name="q22" value="A"> A. $64.800$ kJ</label>
+          <label class="opt-label"><input type="radio" name="q22" value="B"> B. $19.200$ kJ</label>
+          <label class="opt-label"><input type="radio" name="q22" value="C"> C. $84.000$ kJ</label>
+          <label class="opt-label"><input type="radio" name="q22" value="D"> D. $18.000$ kJ</label>
+        </div>
+        <div class="explanation" id="exp22">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Energi input per jam = $2 \times 42.000 = 84.000$ kJ<br>
+          Energi berguna per jam = $18$ kW × $3600$ s = $64.800$ kJ<br>
+          Energi terbuang = $84.000 - 64.800 = 19.200$ kJ</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <div class="submit-bar">
+        <button type="button" class="btn-check" style="background:linear-gradient(135deg,#f87171,#dc2626)" onclick="checkSection('form3',3,['A','A','A','C','B','B','C','B'],8)">
+          <i class="fa-solid fa-check-double" style="margin-right:.4rem"></i>Periksa Bagian 3
+        </button>
+        <div class="result-box" id="res3"></div>
+      </div>
+    </form>
+  </div>
+
+  <!-- ==================== BAGIAN 4 ==================== -->
+  <div id="t4" class="tab-pane">
+    <div class="section-header" style="border-left-color:var(--green)">
+      <h2>🌱 Bagian 4 — Energi Alternatif</h2>
+      <p>Matahari, biomassa, PLTU/nuklir, pengembangan energi alternatif</p>
+      <div class="section-meta">
+        <span class="meta-chip" style="background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.25)"><i class="fa-solid fa-circle-question"></i> 11 Soal</span>
+        <span class="meta-chip badge-literasi"><i class="fa-solid fa-book-open"></i> Ada soal literasi</span>
+      </div>
+    </div>
+
+    <form id="form4">
+
+      <!-- S23 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">23</span>
+          <div style="flex:1"><span class="q-badge badge-tricky">Tricky</span><span class="q-badge badge-konsep">Konsep</span></div>
+        </div>
+        <p class="q-text">
+          Berikut ini adalah ciri-ciri sumber energi:<br>
+          <span style="display:block;padding:.5rem .75rem;background:rgba(255,255,255,.04);border-radius:8px;margin:.5rem 0;font-size:.85rem">
+          (1) Dapat dipulihkan secara alami<br>
+          (2) Menghasilkan emisi CO₂ saat digunakan<br>
+          (3) Bersumber dari proses alam yang berkelanjutan<br>
+          (4) Ketersediaannya terbatas
+          </span>
+          Yang merupakan ciri energi <strong>alternatif terbarukan</strong> adalah...
+        </p>
+        <div class="options" id="q23_opts">
+          <label class="opt-label"><input type="radio" name="q23" value="A"> A. (1) dan (3)</label>
+          <label class="opt-label"><input type="radio" name="q23" value="B"> B. (1), (2), dan (3)</label>
+          <label class="opt-label"><input type="radio" name="q23" value="C"> C. (2) dan (4)</label>
+          <label class="opt-label"><input type="radio" name="q23" value="D"> D. (1), (3), dan (4)</label>
+        </div>
+        <div class="explanation" id="exp23">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Energi alternatif terbarukan: (1) dapat dipulihkan alami ✓ dan (3) bersumber dari proses alam berkelanjutan ✓. Ciri (2) "menghasilkan CO₂" adalah ciri energi fosil. Ciri (4) "terbatas" adalah ciri tak terbarukan. Opsi B menjebak karena biomassa memang menghasilkan CO₂, tapi itu bukan ciri <em>definisi</em> energi terbarukan.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: A</p>
+        </div>
+      </div>
+
+      <!-- S24 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">24</span>
+          <div style="flex:1"><span class="q-badge badge-hitung">Hitungan</span></div>
+        </div>
+        <p class="q-text">
+          Panel surya seluas $10$ m² menerima radiasi matahari dengan intensitas $800$ W/m². Efisiensi panel surya adalah $15\%$. Daya listrik yang dihasilkan adalah...
+        </p>
+        <div class="options" id="q24_opts">
+          <label class="opt-label"><input type="radio" name="q24" value="A"> A. $120$ W</label>
+          <label class="opt-label"><input type="radio" name="q24" value="B"> B. $800$ W</label>
+          <label class="opt-label"><input type="radio" name="q24" value="C"> C. $1.200$ W</label>
+          <label class="opt-label"><input type="radio" name="q24" value="D"> D. $8.000$ W</label>
+        </div>
+        <div class="explanation" id="exp24">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>$P_{in} = I \times A = 800 \times 10 = 8.000$ W<br>
+          $P_{out} = \eta \times P_{in} = 0{,}15 \times 8.000 = 1.200$ W</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: C</p>
+        </div>
+      </div>
+
+      <!-- S25 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">25</span>
+          <div style="flex:1"><span class="q-badge badge-tricky">Tricky</span><span class="q-badge badge-konsep">Konsep</span></div>
+        </div>
+        <p class="q-text">
+          Pada pagi hari yang mendung, daya keluaran panel surya dibandingkan hari cerah akan...
+        </p>
+        <div class="options" id="q25_opts">
+          <label class="opt-label"><input type="radio" name="q25" value="A"> A. Sama saja, karena panel surya menggunakan panas, bukan cahaya</label>
+          <label class="opt-label"><input type="radio" name="q25" value="B"> B. Lebih kecil, karena intensitas cahaya yang diterima lebih rendah</label>
+          <label class="opt-label"><input type="radio" name="q25" value="C"> C. Lebih besar, karena awan memantulkan lebih banyak cahaya ke panel</label>
+          <label class="opt-label"><input type="radio" name="q25" value="D"> D. Nol, karena panel surya tidak bisa bekerja tanpa sinar langsung</label>
+        </div>
+        <div class="explanation" id="exp25">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Panel surya fotovoltaik bekerja dengan cahaya (foton), bukan panas. Saat mendung, <strong>intensitas cahaya berkurang</strong> → daya output berkurang (bukan nol, karena cahaya difus masih ada). Opsi A salah (panel surya = cahaya, bukan panas). Opsi D salah (panel masih bekerja meski redup).</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <!-- S26 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">26</span>
+          <div style="flex:1"><span class="q-badge badge-konsep">Konsep</span></div>
+        </div>
+        <p class="q-text">
+          Biogas yang dihasilkan dari fermentasi limbah organik sebagian besar terdiri dari...
+        </p>
+        <div class="options" id="q26_opts">
+          <label class="opt-label"><input type="radio" name="q26" value="A"> A. Hidrogen (H₂) dan nitrogen (N₂)</label>
+          <label class="opt-label"><input type="radio" name="q26" value="B"> B. Metana (CH₄) dan karbon dioksida (CO₂)</label>
+          <label class="opt-label"><input type="radio" name="q26" value="C"> C. Propana (C₃H₈) dan butana (C₄H₁₀)</label>
+          <label class="opt-label"><input type="radio" name="q26" value="D"> D. Etanol (C₂H₅OH) dan air (H₂O)</label>
+        </div>
+        <div class="explanation" id="exp26">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Biogas hasil fermentasi anaerob limbah organik mengandung ~60-70% <strong>metana (CH₄)</strong> dan ~30-40% <strong>CO₂</strong>, plus sedikit gas lain. Metana inilah yang dibakar sebagai bahan bakar.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <!-- S27 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">27</span>
+          <div style="flex:1"><span class="q-badge badge-tricky">Tricky</span><span class="q-badge badge-konsep">Konsep</span></div>
+        </div>
+        <p class="q-text">
+          Biomassa dianggap "karbon netral" karena...
+        </p>
+        <div class="options" id="q27_opts">
+          <label class="opt-label"><input type="radio" name="q27" value="A"> A. Tidak menghasilkan CO₂ sama sekali saat dibakar</label>
+          <label class="opt-label"><input type="radio" name="q27" value="B"> B. CO₂ yang dilepas saat pembakaran diserap kembali oleh tanaman baru yang tumbuh</label>
+          <label class="opt-label"><input type="radio" name="q27" value="C"> C. Biomassa berasal dari bahan kimia yang tidak mengandung karbon</label>
+          <label class="opt-label"><input type="radio" name="q27" value="D"> D. CO₂ yang dihasilkan biomassa tidak sama dengan CO₂ dari bahan bakar fosil</label>
+        </div>
+        <div class="explanation" id="exp27">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Konsep "karbon netral" biomassa: tanaman menyerap CO₂ dari atmosfer saat tumbuh → CO₂ yang dilepas saat dibakar = CO₂ yang pernah diserap → siklus karbon seimbang (net = 0). Ini berbeda dengan fosil yang melepas karbon yang tersimpan jutaan tahun.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <!-- S28 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">28</span>
+          <div style="flex:1"><span class="q-badge badge-literasi">Literasi</span><span class="q-badge badge-hitung">Hitungan</span></div>
+        </div>
+        <p class="q-text">
+          <span style="background:rgba(255,255,255,.04);border-left:3px solid var(--green);display:block;padding:.75rem 1rem;border-radius:0 8px 8px 0;margin-bottom:.75rem;font-size:.85rem;line-height:1.7">
+          Sebuah PLTU batu bara menghasilkan daya $500$ MW dengan efisiensi $40\%$. Di sisi lain, sebuah PLTN (Pembangkit Listrik Tenaga Nuklir) menghasilkan daya $1.000$ MW dengan efisiensi $33\%$.
+          </span>
+          Perbandingan energi input (bahan bakar) yang diperlukan PLTU vs PLTN per satuan waktu adalah...
+        </p>
+        <div class="options" id="q28_opts">
+          <label class="opt-label"><input type="radio" name="q28" value="A"> A. PLTU memerlukan lebih sedikit bahan bakar</label>
+          <label class="opt-label"><input type="radio" name="q28" value="B"> B. $P_{PLTU} : P_{PLTN} = 1.250 : 3.030$ MW (PLTN memerlukan lebih banyak)</label>
+          <label class="opt-label"><input type="radio" name="q28" value="C"> C. $P_{PLTU} : P_{PLTN} = 500 : 1.000$ MW</label>
+          <label class="opt-label"><input type="radio" name="q28" value="D"> D. Keduanya memerlukan input yang sama karena sama-sama menghasilkan listrik</label>
+        </div>
+        <div class="explanation" id="exp28">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>$P_{input_{PLTU}} = \frac{500}{0{,}40} = 1.250$ MW<br>
+          $P_{input_{PLTN}} = \frac{1000}{0{,}33} \approx 3.030$ MW<br>
+          PLTN memerlukan input jauh lebih besar karena menghasilkan daya lebih besar dengan efisiensi lebih rendah.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <!-- S29 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">29</span>
+          <div style="flex:1"><span class="q-badge badge-literasi">Literasi</span><span class="q-badge badge-tricky">Tricky</span></div>
+        </div>
+        <p class="q-text">
+          <span style="background:rgba(255,255,255,.04);border-left:3px solid var(--green);display:block;padding:.75rem 1rem;border-radius:0 8px 8px 0;margin-bottom:.75rem;font-size:.85rem;line-height:1.7">
+          Reaksi fisi nuklir: ${}^{235}_{92}U + {}^1_0n \to {}^{141}_{56}Ba + {}^{92}_{36}Kr + 3{}^1_0n + \text{energi}$<br>
+          Setiap reaksi menghasilkan energi $\approx 200$ MeV (1 MeV = $1{,}6 \times 10^{-13}$ J).
+          </span>
+          Keunggulan energi nuklir dibandingkan batu bara dalam hal produksi energi per kg bahan bakar adalah...
+        </p>
+        <div class="options" id="q29_opts">
+          <label class="opt-label"><input type="radio" name="q29" value="A"> A. Sama saja, karena keduanya menghasilkan panas</label>
+          <label class="opt-label"><input type="radio" name="q29" value="B"> B. Uranium menghasilkan energi jutaan kali lebih besar per kg dibandingkan batu bara</label>
+          <label class="opt-label"><input type="radio" name="q29" value="C"> C. Batu bara lebih efisien karena tidak menghasilkan limbah berbahaya</label>
+          <label class="opt-label"><input type="radio" name="q29" value="D"> D. Uranium lebih murah sehingga lebih menguntungkan</label>
+        </div>
+        <div class="explanation" id="exp29">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>1 kg uranium-235 mengandung ~$2{,}56 \times 10^{24}$ atom. Setiap fisi menghasilkan ~200 MeV. Total energi $\approx 8 \times 10^{13}$ J/kg. Batu bara: ~$2{,}8 \times 10^7$ J/kg. Perbandingan: $\frac{8 \times 10^{13}}{2{,}8 \times 10^7} \approx 2{,}8 \times 10^6$ kali. Jadi uranium menghasilkan energi <strong>jutaan kali lebih besar</strong> per kg.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <!-- S30 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">30</span>
+          <div style="flex:1"><span class="q-badge badge-literasi">Literasi</span><span class="q-badge badge-tricky">Tricky</span></div>
+        </div>
+        <p class="q-text">
+          <span style="background:rgba(255,255,255,.04);border-left:3px solid var(--green);display:block;padding:.75rem 1rem;border-radius:0 8px 8px 0;margin-bottom:.75rem;font-size:.85rem;line-height:1.7">
+          PLTN menghasilkan listrik dengan cara: reaksi fisi → panas → uap air → turbin → generator. Limbah radioaktif yang dihasilkan harus disimpan dalam wadah khusus selama ribuan tahun.
+          </span>
+          Konversi energi utama yang terjadi dalam PLTN secara berurutan adalah...
+        </p>
+        <div class="options" id="q30_opts">
+          <label class="opt-label"><input type="radio" name="q30" value="A"> A. Kimia → Kalor → Mekanik → Listrik</label>
+          <label class="opt-label"><input type="radio" name="q30" value="B"> B. Nuklir → Kalor → Mekanik → Listrik</label>
+          <label class="opt-label"><input type="radio" name="q30" value="C"> C. Listrik → Nuklir → Kalor → Mekanik</label>
+          <label class="opt-label"><input type="radio" name="q30" value="D"> D. Nuklir → Listrik → Kalor → Mekanik</label>
+        </div>
+        <div class="explanation" id="exp30">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Fisi nuklir → melepas <strong>energi nuklir</strong> → memanaskan air (→ <strong>kalor</strong>) → uap berputar turbin (<strong>mekanik</strong>) → generator menghasilkan (<strong>listrik</strong>). Urutan: <strong>Nuklir → Kalor → Mekanik → Listrik</strong>.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: B</p>
+        </div>
+      </div>
+
+      <!-- S31 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">31</span>
+          <div style="flex:1"><span class="q-badge badge-konsep">Konsep</span><span class="q-badge badge-tricky">Tricky</span></div>
+        </div>
+        <p class="q-text">
+          Salah satu hambatan pengembangan energi surya di Indonesia adalah...
+        </p>
+        <div class="options" id="q31_opts">
+          <label class="opt-label"><input type="radio" name="q31" value="A"> A. Indonesia tidak mendapat cukup sinar matahari sepanjang tahun</label>
+          <label class="opt-label"><input type="radio" name="q31" value="B"> B. Energi surya tidak dapat disimpan sama sekali</label>
+          <label class="opt-label"><input type="radio" name="q31" value="C"> C. Biaya investasi awal yang tinggi dan ketergantungan pada kondisi cuaca</label>
+          <label class="opt-label"><input type="radio" name="q31" value="D"> D. Panel surya menghasilkan limbah radioaktif berbahaya</label>
+        </div>
+        <div class="explanation" id="exp31">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Indonesia berada di garis khatulistiwa dengan intensitas matahari tinggi sepanjang tahun → opsi A salah. Energi surya bisa disimpan dengan baterai → opsi B salah. Panel surya tidak radioaktif → opsi D salah. <strong>Hambatan nyata</strong>: biaya panel yang masih mahal + output bergantung cuaca (mendung/hujan).</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: C</p>
+        </div>
+      </div>
+
+      <!-- S32 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">32</span>
+          <div style="flex:1"><span class="q-badge badge-konsep">Konsep</span></div>
+        </div>
+        <p class="q-text">
+          Perhatikan daftar sumber energi berikut:<br>
+          <span style="display:block;padding:.5rem .75rem;background:rgba(255,255,255,.04);border-radius:8px;margin:.5rem 0;font-size:.85rem">
+          (1) Biogas dari kotoran sapi &nbsp;&nbsp; (2) Batu bara &nbsp;&nbsp; (3) Panas bumi &nbsp;&nbsp; (4) Gas alam &nbsp;&nbsp; (5) Tenaga angin &nbsp;&nbsp; (6) Shale oil
+          </span>
+          Yang termasuk kelompok energi <strong>alternatif terbarukan</strong> adalah...
+        </p>
+        <div class="options" id="q32_opts">
+          <label class="opt-label"><input type="radio" name="q32" value="A"> A. (1), (3), dan (5)</label>
+          <label class="opt-label"><input type="radio" name="q32" value="B"> B. (1), (2), dan (3)</label>
+          <label class="opt-label"><input type="radio" name="q32" value="C"> C. (3), (4), dan (5)</label>
+          <label class="opt-label"><input type="radio" name="q32" value="D"> D. (2), (4), dan (6)</label>
+        </div>
+        <div class="explanation" id="exp32">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Terbarukan: (1) biogas ✓, (3) panas bumi ✓, (5) angin ✓.<br>
+          Tak terbarukan: (2) batu bara ✗, (4) gas alam ✗, (6) shale oil ✗.<br>
+          Pengecoh: gas alam sering dianggap "bersih" tapi tetap fosil dan tak terbarukan.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: A</p>
+        </div>
+      </div>
+
+      <!-- S33 -->
+      <div class="q-card">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.75rem">
+          <span class="q-number">33</span>
+          <div style="flex:1"><span class="q-badge badge-tricky">Tricky</span><span class="q-badge badge-konsep">Konsep</span></div>
+        </div>
+        <p class="q-text">
+          Pernyataan yang <strong>paling tepat</strong> menggambarkan mengapa pengembangan energi alternatif menjadi prioritas global saat ini adalah...
+        </p>
+        <div class="options" id="q33_opts">
+          <label class="opt-label"><input type="radio" name="q33" value="A"> A. Karena energi fosil sudah habis sepenuhnya di seluruh dunia</label>
+          <label class="opt-label"><input type="radio" name="q33" value="B"> B. Karena energi alternatif selalu lebih murah dari energi fosil</label>
+          <label class="opt-label"><input type="radio" name="q33" value="C"> C. Karena cadangan fosil semakin menipis, harga energi meningkat, dan dampak lingkungan yang serius mendorong transisi ke energi bersih</label>
+          <label class="opt-label"><input type="radio" name="q33" value="D"> D. Karena peraturan internasional mewajibkan semua negara menggunakan energi terbarukan mulai 2025</label>
+        </div>
+        <div class="explanation" id="exp33">
+          <p class="exp-title"><i class="fa-solid fa-lightbulb"></i> Pembahasan</p>
+          <p>Alasan pengembangan energi alternatif bersifat multifaktor: (1) <strong>cadangan fosil terbatas</strong> dan semakin dalam/sulit diambil → harga naik, (2) <strong>dampak lingkungan</strong> serius (pemanasan global, polusi udara), (3) keamanan pasokan energi jangka panjang. Opsi A salah (fosil belum habis). Opsi B salah (energi terbarukan masih mahal untuk banyak teknologi). Opsi D tidak akurat.</p>
+          <p style="color:var(--green);font-weight:700;margin-top:.5rem">✓ Jawaban: C</p>
+        </div>
+      </div>
+
+      <div class="submit-bar">
+        <button type="button" class="btn-check" style="background:linear-gradient(135deg,#4ade80,#16a34a)" onclick="checkSection('form4',4,['A','C','B','B','B','B','B','B','C','A','C'],11)">
+          <i class="fa-solid fa-check-double" style="margin-right:.4rem"></i>Periksa Bagian 4
+        </button>
+        <div class="result-box" id="res4"></div>
+      </div>
+    </form>
+  </div>
+
+</main>
+
+<footer style="border-top:1px solid var(--border);text-align:center;padding:2rem;color:var(--muted);font-size:.8rem;position:relative;z-index:1">
+  <p>Latsol SHB Fisika Kelas X — Energi | Semester Genap 2024-2025</p>
+  <p style="margin-top:.25rem;font-size:.72rem">33 soal · 4 bagian · Sesuai kisi-kisi resmi</p>
+</footer>
+
+<script>
+  const totalQ = 33;
+  let answered = new Set();
+
+  // Track answered
+  document.querySelectorAll('input[type=radio]').forEach(r => {
+    r.addEventListener('change', () => {
+      answered.add(r.name);
+      document.getElementById('answered-count').textContent = answered.size;
+      const pct = (answered.size / totalQ * 100).toFixed(0);
+      document.getElementById('progress').style.width = pct + '%';
+    });
+  });
+
+  function switchTab(paneId, btnId) {
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(paneId).classList.add('active');
+    document.getElementById(btnId).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    if(window.MathJax) MathJax.typesetPromise();
+  }
+
+  function checkSection(formId, sectionNum, answers, total) {
+    let score = 0;
+    // answers = correct answers for Q in this section
+    // Section offsets
+    const offsets = {1:0, 2:6, 3:14, 4:22};
+    const offset = offsets[sectionNum];
+
+    for(let i = 0; i < total; i++) {
+      const qIdx = offset + i + 1;
+      const radios = document.getElementsByName('q' + qIdx);
+      const optsDiv = document.getElementById('q' + qIdx + '_opts');
+      const expDiv = document.getElementById('exp' + qIdx);
+      const correct = answers[i];
+
+      // Reset
+      if(optsDiv) optsDiv.querySelectorAll('.opt-label').forEach(l => l.classList.remove('correct','wrong'));
+      if(expDiv) expDiv.classList.remove('show');
+
+      let selected = null;
+      for(let r of radios) { if(r.checked) { selected = r.value; break; } }
+
+      // Mark correct
+      for(let r of radios) {
+        if(r.value === correct) r.parentElement.classList.add('correct');
+      }
+
+      if(selected === correct) {
+        score++;
+      } else {
+        if(selected) {
+          for(let r of radios) { if(r.value === selected) r.parentElement.classList.add('wrong'); }
+        }
+        if(expDiv) expDiv.classList.add('show');
+      }
+    }
+
+    // Update total score display
+    updateTotalScore();
+
+    const res = document.getElementById('res' + sectionNum);
+    res.style.display = 'block';
+    const pct = Math.round(score/total*100);
+    if(score === total) {
+      res.style.cssText = 'display:block;background:rgba(74,222,128,.15);color:#4ade80;border:1px solid rgba(74,222,128,.3);padding:.45rem 1.2rem;border-radius:8px;font-weight:700;font-size:.85rem';
+      res.textContent = `🎉 Sempurna! ${score}/${total} (${pct}%)`;
+    } else if(pct >= 60) {
+      res.style.cssText = 'display:block;background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.3);padding:.45rem 1.2rem;border-radius:8px;font-weight:700;font-size:.85rem';
+      res.textContent = `👍 Bagus! ${score}/${total} (${pct}%) — cek penjelasan!`;
+    } else {
+      res.style.cssText = 'display:block;background:rgba(248,113,113,.15);color:#f87171;border:1px solid rgba(248,113,113,.3);padding:.45rem 1.2rem;border-radius:8px;font-weight:700;font-size:.85rem';
+      res.textContent = `💪 Semangat! ${score}/${total} (${pct}%) — pelajari lagi!`;
+    }
+  }
+
+  function updateTotalScore() {
+    // Count all correct across all answered
+    const allCorrect = {
+      1:'B',2:'B',3:'C',4:'B',5:'A',6:'B',
+      7:'C',8:'D',9:'A',10:'B',11:'A',12:'D',13:'B',14:'B',
+      15:'A',16:'A',17:'A',18:'C',19:'B',20:'B',21:'C',22:'B',
+      23:'A',24:'C',25:'B',26:'B',27:'B',28:'B',29:'B',30:'B',31:'C',32:'A',33:'C'
+    };
+    let total = 0;
+    for(let i=1;i<=33;i++){
+      const radios = document.getElementsByName('q'+i);
+      for(let r of radios){
+        if(r.checked && r.value === allCorrect[i]){ total++; break; }
+      }
+    }
+    document.getElementById('total-score').textContent = total + '/33';
+  }
+</script>
+</body>
+</html>
